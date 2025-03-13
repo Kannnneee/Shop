@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Admin Dashboard</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="product-style.css">
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li><a href="#"></span><span class="title">Brand Name</span></a></li>
+                <li><a href="home.html" onclick="showSection('home')"><span class="icon"><ion-icon name="home-outline"></ion-icon></span><span class="title">Home</span></a></li>
+                <li><a href="shop.html" onclick="showSection('shop')"><span class="icon"><ion-icon name="cart-outline"></ion-icon></span><span class="title">Shop</span></a></li>
+                <li><a href="cart.html" onclick="showSection('cart')"><span class="icon"><ion-icon name="cart-outline"></ion-icon></span><span class="title">Cart</span></a></li>
+            </ul>
+        </div>
+
+        <!-- ========================= Topbar ==================== -->
+        <section class="main">
+            <nav class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="button-container">
+                    <button id="loginbutton" class="button">Login</button>
+                    <button id="signupbutton" class="button">Signup</button>
+                </div>
+            </nav>
+
+        <!-- ========================= product page ==================== -->        
+                <!-- Product Section -->
+            <section id="product">
+                <a href="#" id="link_to_home"><p>&lt;&nbsp;</p>All Products (36)</a>
+                
+                <!-- Viewed Item Container -->
+                <div id="viewed_item">
+                    <div id="viewed_image">
+                        <img id="main_viewed_image" src="image/sample.jpg" alt="Viewed item image">
+                        <ul id="sub_images">
+                            <li><input type="image" class="sub-image" src="image/sample.jpg" alt="Sub-image 1"></li>
+                            <li><input type="image" class="sub-image" src="image/sample.jpg" alt="Sub-image 2"></li>
+                            <li><input type="image" class="sub-image" src="image/sample.jpg" alt="Sub-image 3"></li>
+                            <li><input type="image" class="sub-image" src="image/sample.jpg" alt="Sub-image 4"></li>
+                        </ul>
+                    </div>
+                    <form id="details_and_add_to_cart">
+                        <h2 id="product_name">Product Name</h2>
+                        <ul class="rating">
+                            <li>
+                                <img src="icon/star.svg" class="star" alt="+1 rating">
+                                <img src="icon/star.svg" class="star" alt="+1 rating">
+                                <img src="icon/star.svg" class="star" alt="+1 rating">
+                                <img src="icon/star.svg" class="star" alt="+1 rating">
+                                <img src="icon/empty-star.svg" class="star" alt="+0 rating">
+                            </li>
+                            <li class="total_rating">36 rating</li>
+                        </ul>
+                        <p class="price" id="product_price">$10</p>
+                        <p id="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit...</p>
+                        <ul id="form-content">
+                            <li>
+                                <p class="label">Quantity</p>
+                                <!-- 🔴 Changed from <p> to <input> so JavaScript can modify it -->
+                                <input type="number" id="quantity" value="1" min="1">
+                            </li>
+                            <li id="quantity_button_list">
+                                <input type="button" class="quantity_button" id="add_quantity" value="∧">
+                                <input type="button" class="quantity_button" id="subtract_quantity" value="∨">
+                            </li>
+                            <li id="total_amount_container">
+                                <p class="label">Total Amount</p>
+                                <p id="total_amount">$10</p>
+                            </li>
+                            <li>
+                                <input type="button" id="add_to_cart" value="Add to Cart">
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+
+                <!-- Similar Items Section -->
+                <div id="similar_items">
+                    <h2>Similar Items</h2>
+                    <div class="similar_items-container">
+                        <a href="product.html?name=Product%203&price=29.99&image=image/gibson.jpg&sub1=image/gibson.jpg&sub2=image/gibson.jpg&sub3=image/gibson.jpg&sub4=image/gibson.jpg" class="product-link" >
+                            <div class="product" data-part="strings">
+                                <img src="image/gibson.jpg" alt="Product 3">
+                                <h3>Product 3</h3>
+                                <div class="stars">
+                                    ★★★★★
+                                </div>
+                                <p>$29.99</p>
+                            </div>
+                        </a>
+                        <a href="product.html?name=Product%201&price=24.99&image=image/guitar-product.jpg&sub1=image/guitar-product.jpg&sub2=image/guitar-product.jpg&sub3=image/guitar-product.jpg&sub4=image/guitar-product.jpg" class="product-link">
+                            <div class="product" data-part="strings">
+                                <img src="image/guitar-product.jpg" alt="Product 1">
+                                <h3>Product 1</h3>
+                                <div class="stars">
+                                    ★★★★★
+                                </div>
+                                <p>$24.99</p>
+                            </div>
+                        </a>
+                    
+                        <a href="product.html?name=Product%202&price=29.99&image=image/kalimba.jpg&sub1=image/kalimba.jpg&sub2=image/kalimba.jpg&sub3=image/kalimba.jpg&sub4=image/kalimba.jpg" class="product-link">
+                            <div class="product" data-part="percussion">
+                                <img src="image/kalimba.jpg" alt="Product 2">
+                                <h3>Product 2</h3>
+                                <div class="stars">
+                                    ★★★★★
+                                </div>
+                                <p>$29.99</p>
+                            </div>
+                        </a>
+                    
+                        <a href="product.html?name=Product%203&price=29.99&image=image/Medeli.png&sub1=image/Medeli.png&sub2=image/Medeli.png&sub3=image/Medeli.png&sub4=image/Medeli.png" class="product-link">
+                            <div class="product" data-part="percussion">
+                                <img src="image/Medeli.png" alt="Product 3">
+                                <h3>Product 3</h3>
+                                <div class="stars">
+                                    ★★★★★
+                                </div>
+                                <p>$29.99</p>
+                            </div>
+                        </a>
+                    
+                        <a href="product.html?name=Product%204&price=29.99&image=image/LAVA ME PLAY Lite 36_ Acoustic Guitar.jpg&sub1=image/LAVA ME PLAY Lite 36_ Acoustic Guitar.jpg&sub2=image/LAVA ME PLAY Lite 36_ Acoustic Guitar.jpg&sub3=image/LAVA ME PLAY Lite 36_ Acoustic Guitar.jpg&sub4=image/LAVA ME PLAY Lite 36_ Acoustic Guitar.jpg" class="product-link">
+                            <div class="product" data-part="strings">
+                                <img src="image/LAVA ME PLAY Lite 36_ Acoustic Guitar.jpg" alt="Product 4">
+                                <h3>Product 4</h3>
+                                <div class="stars">
+                                    ★★★★★
+                                </div>
+                                <p>$29.99</p>
+                            </div>
+                        </a>
+                    
+                    </div>
+                </div>
+            </section>
+        </section>   
+        <section class="modal" id="loginModal">
+            <div class="modalcontainer">   
+                <button class="close" data-modal="loginModal">&times;</button>    
+                
+                <section class="modalheader">
+                    <h4>Login to order.</h4>
+                    <a href="#" id="switchtosignup">New Member? Register here.</a></p>
+                </section>          
+                <form id="loginForm">
+                    <input type="email" id="loginEmail" required placeholder="Enter your email">
+                    <input type="password" id="loginPassword" required placeholder="Enter your password">
+                    <button type="submit" id="submitbutton">Login</button>
+                </form>
+                <p id="loginMessage"></p>
+
+            </div>
+        </section>
+
+        <section class="modal" id="signupModal">
+            
+            <div class="modalcontainer"> 
+                <button class="close" data-modal="signupModal">&times;</button>
+                
+                <section class="modalheader">
+                    <h4>Signup to order.</h4>
+                    <a href="#" id="switchtologin">Already a member? Login here.</a></p>
+                </section>
+                <form id="signupForm">
+                    <section class="name">
+                        <input type="text" class="inputname" id="firstName" required placeholder="First Name">
+                        <input type="text" class="inputname" id="lastName" required placeholder="Last Name">
+                    </section>
+                    <input type="email" id="signupEmail" required placeholder="Email">
+                    <input type="password" id="signupPassword" required placeholder="Password">
+                    <input type="password" id="confirmPassword" required placeholder="Confirm Password">
+                    <button type="submit" id="submitbutton" class="submitbutton">Signup</button>
+                </form>      
+                <p id="signupMessage"></p>
+            </div>
+        </section>
+
+    <!-- =========== Scripts =========  -->
+    <script src="main.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
