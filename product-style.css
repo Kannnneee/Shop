@@ -10,8 +10,8 @@
 }
 
 :root {
-  --blue: #ADB2D4;
-  --blue1: #adb2d478;
+  --blue: #5e4a43;
+  --blue1: #5e4a43;
   --white:#F6F0F0;
   --gray: #f5f5f5;
   --black1: #222;
@@ -358,7 +358,7 @@ p#quantity {
 input.quantity_button {
     font-size: 10px;
     padding: 1px 0px 1px;
-    color: #9C89FF;
+    color: #9e7353;
     background-color: #F6F6F6;
     border-radius: 3px;
     font-weight: bold;
@@ -367,8 +367,8 @@ input.quantity_button {
 }
 
 input.quantity_button:hover {
-    color: #F6F6F6;
-    background-color: #9C89FF;
+    color: #5e4a43,;
+    background-color: #5e4a43,;
     cursor: pointer;
 }
 
@@ -377,7 +377,7 @@ p#total_amount {
     border-radius: 5px;
     width: 80px;
     font-size: 14px;
-    color: #9C89FF;
+    color: #9e7353;
     padding: 9px 0px 9px;
     font-weight: bold;
     text-align: center;
@@ -388,14 +388,14 @@ input#add_to_cart {
     padding: 9px 0px 9px;
     font-size: 14px;
     background-color: transparent;
-    border: 1px #9C89FF solid;
-    color:#9C89FF;
+    border: 1px #9e7353 solid;
+    color:#9e7353;
     border-radius: 5px;
 }
 
 input#add_to_cart:hover {
-    background-color: #9C89FF;
-    color: #F6F6F6;
+    background-color: #5e4a43,;
+    color: #5e4a43;
     cursor: pointer;
 }
 .similar_items-container {
@@ -451,7 +451,7 @@ a {
 }
 
 .price {
-    color: #7971D9;
+    color: #5e4a43;
     background-color: #F1F1F1;
     padding: 3px 0px 3px 0px;
     font-size: 14px;
@@ -472,7 +472,7 @@ img.star {
 button {
   padding: 10px 20px;
   border: none;
-  background-color: #7b5ef2;
+  background-color: #5e4a43;
   color: white;
   border-radius: 30px;
   margin-left: 10px;
@@ -486,7 +486,7 @@ button {
   align-items: center;
   justify-content: center;
   font-size: 30px;
-  color: #B0C7DC;
+  color: #9e7353;
   margin-bottom: 30px;
 
 }
@@ -494,11 +494,10 @@ button {
 .modal {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 30%;
+  left: 40%;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
 }
@@ -520,7 +519,7 @@ h2 {
 }
 
 a {
-  color: #7b5ef2;
+  color: #474747;
   text-decoration: none;
 }
 
@@ -536,7 +535,7 @@ form {
 input {
   padding: 8px;
   margin-top: 15px;
-  border: 1px solid #ac9af2;
+  border: 1px solid #9e7353;
   border-radius: 15px;
 }
 button[type="submit"] {
@@ -550,6 +549,11 @@ button[type="submit"] {
 .submitbutton{
   display: flex;
   justify-content: left;
+  text-align: center;
+}
+
+.signup {
+  text-align: center;
 }
 .name{
   display: flex;
@@ -559,6 +563,11 @@ p{
   font-size: 14px;
   text-align: center;
 }
+
+.inputname {
+  width: 175px;
+}
+
 
 
 /* ====================== Responsive Design ========================== */
