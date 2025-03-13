@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Admin Dashboard</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="cart-style.css">
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li><a href="#"></span><span class="title">Brand Name</span></a></li>
+                <li><a href="home.html" onclick="showSection('home')"><span class="icon"><ion-icon name="home-outline"></ion-icon></span><span class="title">Home</span></a></li>
+                <li><a href="shop.html" onclick="showSection('shop')"><span class="icon"><ion-icon name="cart-outline"></ion-icon></span><span class="title">Shop</span></a></li>
+                <li><a href="cart.html" onclick="showSection('cart')"><span class="icon"><ion-icon name="cart-outline"></ion-icon></span><span class="title">Cart</span></a></li>
+        </div>
+
+        <!-- ========================= Topbar ==================== -->
+        <section class="main">
+            <nav class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="button-container">
+                    <button id="loginbutton" class="button">Login</button>
+                    <button id="signupbutton" class="button">Signup</button>
+                </div>
+            </nav>
+
+     
+        <!-- ========================= Cart ==================== -->
+            <section id="cart" class="content-section">
+                <header>
+                    <div class="search">
+                        <label>
+                            <input type="text" placeholder="Search here">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </label>
+                    </div>
+                </header>       
+        <!-- ========================= Added to Cart ==================== -->
+                <div class="cart">
+                    <div class="cart-container">
+                        <!-- Cart items will be added here -->
+                    </div>
+                    
+            <!-- ========================= Cart Checkout==================== -->
+                    <div class="checkout-container">
+                        <h2>Shipping Information</h2>
+                        <form>
+                            <section class="cart-name">
+                                <input type="text" placeholder="First Name">
+                                <input type="text" placeholder="Last Name">
+                            </section>
+                            <input type="text" class="address" placeholder="Address">
+                            <input type="text" class="address" placeholder="Address 2">
+                            <section class="cart-zipcode">
+                                <input type="text" placeholder="City">
+                                <input type="text" placeholder="State">
+                                <input type="text" placeholder="ZIP Code">
+                            </section>
+                        </form>
+                        <h2>Order Summary</h2>
+                        <div class="order-summary">
+                            <p>Items</p>
+                            <p>$40</p>
+                        </div>
+                        <div class="order-summary">
+                            <p>Shipping</p>
+                            <p>$5</p>
+                        </div>
+                        <hr class="custom-hr">
+                        <div class="order-summary">
+                            <p>Total Amount</p>
+                            <p>$45</p>
+                        </div>
+                        <button class="checkout-button" onclick="openPopup()" disabled>Proceed to Checkout</button>
+                    </div>
+                </div>
+                <div class="popup-overlay" id="paymentPopup">
+                    <div class="popup-content">
+                        <span class="close-btn" onclick="closePopup()">✖</span>
+                        
+                        <div class="card-logo">
+                            <img src="assets/imgs/cardlogo.svg" alt="Card Logos">
+                        </div>
+            
+                        <h3>Card Details</h3>
+            
+                        <div class="input-group">
+                            <input type="text" placeholder="Enter Full Name">
+                        </div>
+            
+                        <div class="input-group">
+                            <input type="text" placeholder="Card Number">
+                        </div>
+            
+                        <div class="input-row">
+                            <input type="text" placeholder="Expiration">
+                            <input type="text" placeholder="CVC">
+                        </div>
+            
+                        <div class="amount">
+                            Total Amount: <span id="popupTotalAmount">$45</span>
+                        </div>
+            
+                        <button class="pay-btn">Pay</button>
+                    </div>
+                </div>
+            
+            </section>
+
+        </section>    
+           
+        <section class="modal" id="loginModal">
+            <div class="modalcontainer">   
+                <button class="close" data-modal="loginModal">&times;</button>    
+                
+                <section class="modalheader">
+                    <h4>Login to order.</h4>
+                    <a href="#" id="switchtosignup">New Member? Register here.</a></p>
+                </section>          
+                <form id="loginForm">
+                    <input type="email" id="loginEmail" required placeholder="Enter your email">
+                    <input type="password" id="loginPassword" required placeholder="Enter your password">
+                    <button type="submit" id="submitbutton">Login</button>
+                </form>
+                <p id="loginMessage"></p>
+
+            </div>
+        </section>
+
+        <section class="modal" id="signupModal">
+            
+            <div class="modalcontainer"> 
+                <button class="close" data-modal="signupModal">&times;</button>
+                
+                <section class="modalheader">
+                    <h4>Signup to order.</h4>
+                    <a href="#" id="switchtologin">Already a member? Login here.</a></p>
+                </section>
+                <form id="signupForm">
+                    <section class="name">
+                        <input type="text" class="inputname" id="firstName" required placeholder="First Name">
+                        <input type="text" class="inputname" id="lastName" required placeholder="Last Name">
+                    </section>
+                    <input type="email" id="signupEmail" required placeholder="Email">
+                    <input type="password" id="signupPassword" required placeholder="Password">
+                    <input type="password" id="confirmPassword" required placeholder="Confirm Password">
+                    <button type="submit" id="submitbutton" class="submitbutton">Signup</button>
+                </form>      
+                <p id="signupMessage"></p>
+            </div>
+        </section>
+    <!-- =========== Scripts =========  -->
+    <script src="main.js"></script>
+    <script src="login.js"></script>
+    <script src="cart.js"></script>
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        
+</body>
+
+</html>
