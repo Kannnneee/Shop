@@ -529,7 +529,27 @@ button {
   margin-bottom: 30px;
 
 }
+.categories ul li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 10px;
+  color: black;
+  transition: background-color 0.3s;
+}
 
+.categories ul li a img {
+  margin-right: 10px;
+  width: 24px; /* Adjust size */
+  height: 24px;
+}
+
+/* Hover and Active (Clicked) State */
+.categories ul li a:hover,
+.categories ul li a.active {
+  background-color: #9e7353; /* Change background */
+  border-radius: 15px;
+}
 .modal {
   display: none;
   position: fixed;

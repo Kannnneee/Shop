@@ -180,38 +180,63 @@ document.getElementById("add_to_cart").addEventListener("click", function () {
       return;
   }
 
-    let product = {
-        name: document.getElementById("product_name").textContent,
-        price: document.getElementById("product_price").textContent,
-        image: document.getElementById("main_viewed_image").src,
-        quantity: 1, // Default quantity
-        total: document.getElementById("total_amount").textContent
-    };
+  // Extract product details
+  let productName = document.getElementById("product_name").textContent;
+  let productPrice = document.getElementById("product_price").textContent.trim();
+  let productImage = document.getElementById("main_viewed_image").src;
+  let quantity = parseInt(document.getElementById("quantity").value, 10);
+  let totalAmount = document.getElementById("total_amount").textContent.trim();
 
-    // Retrieve existing cart from localStorage
-    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+  // Remove commas and extract numerical value from price
+  let priceValue = parseFloat(productPrice.replace(/[$,]/g, ""));
+  let totalValue = parseFloat(totalAmount.replace(/[$,]/g, ""));
 
-    // Check if the item is already in the cart
-    let existingItem = cart.find(item => item.name === product.name);
-    
-    if (existingItem) {
-        // If the item exists, increase quantity and update total
-        existingItem.quantity += 1;
-        existingItem.total = "$" + (parseFloat(existingItem.price.replace("$", "")) * existingItem.quantity).toFixed(2);
-    } else {
-        // Otherwise, add a new item
-        cart.push(product);
-    }
+  // Create product object
+  let product = {
+      name: productName,
+      price: "$" + priceValue.toLocaleString(), // Store formatted price
+      image: productImage,
+      quantity: quantity,
+      total: "$" + totalValue.toLocaleString() // Store formatted total
+  };
 
-    // Save back to localStorage
-    localStorage.setItem("cartItems", JSON.stringify(cart));
+  // Retrieve existing cart from localStorage
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    console.log("Cart Updated:", cart);
+  // Check if the item is already in the cart
+  let existingItem = cart.find(item => item.name === product.name);
+  
+  if (existingItem) {
+      // If the item exists, update quantity and total
+      existingItem.quantity += quantity;
+      existingItem.total = "$" + (priceValue * existingItem.quantity).toLocaleString();
+  } else {
+      // Otherwise, add a new item
+      cart.push(product);
+  }
 
-    // 🚀 Redirect to cart.html after adding the item
-    window.location.href = "cart.html";
+  // Save back to localStorage
+  localStorage.setItem("cartItems", JSON.stringify(cart));
+
+  console.log("Cart Updated:", cart);
+
+  // 🚀 Redirect to cart.html after adding the item
+  window.location.href = "cart.html";
 });
 
+// 🔄 Update total amount dynamically when quantity changes
+document.getElementById("quantity").addEventListener("input", function () {
+  let productPrice = parseFloat(document.getElementById("product_price").textContent.replace(/[$,]/g, ""));
+  let quantity = parseInt(this.value, 10);
+
+  if (quantity < 1) {
+      this.value = 1; // Ensure minimum value is 1
+      quantity = 1;
+  }
+
+  let newTotal = productPrice * quantity;
+  document.getElementById("total_amount").textContent = "$" + newTotal.toLocaleString();
+});
 
 
 
@@ -347,7 +372,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize UI on page load
   updateUI();
 });
-
 
 
 

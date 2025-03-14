@@ -1,31 +1,41 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     let cartContainer = document.querySelector(".cart-container");
 
     // Select all .order-summary elements
     let orderSummaryElements = document.querySelectorAll(".order-summary");
-
-    // Ensure we correctly map each section
-    let itemsTotalElement = orderSummaryElements[0].querySelector("p:nth-child(2)"); // Items total
-    let shippingElement = orderSummaryElements[1].querySelector("p:nth-child(2)"); // Shipping fee
-    let totalAmountElement = orderSummaryElements[2].querySelector("p:nth-child(2)"); // Final total (items + shipping)
+    let itemsTotalElement = orderSummaryElements[0]?.querySelector("p:nth-child(2)"); // Items total
+    let shippingElement = orderSummaryElements[1]?.querySelector("p:nth-child(2)"); // Shipping fee
+    let totalAmountElement = orderSummaryElements[2]?.querySelector("p:nth-child(2)"); // Final total
 
     // Select the total inside the payment popup
     let popupTotalElement = document.getElementById("popupTotalAmount");
-
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
     function calculateTotal() {
-        let itemsTotal = cart.reduce((sum, item) => sum + (parseFloat(item.price.replace("$", "")) * item.quantity), 0);
+        let itemsTotal = cart.reduce((sum, item) => {
+            let itemPrice = parseFloat(item.price.replace(/[$,]/g, "")); // Ensure price is parsed correctly
+            return sum + (itemPrice * item.quantity);
+        }, 0);
+    
         let shippingFee = 5.00;
         let grandTotal = itemsTotal + shippingFee;
-
+    
         // Update the UI in the order summary
-        if (itemsTotalElement) itemsTotalElement.textContent = `$${itemsTotal.toFixed(2)}`;
+        if (itemsTotalElement) itemsTotalElement.textContent = `$${itemsTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
         if (shippingElement) shippingElement.textContent = `$${shippingFee.toFixed(2)}`;
-        if (totalAmountElement) totalAmountElement.textContent = `$${grandTotal.toFixed(2)}`;
-
-        // Update the total inside the payment popup
-        if (popupTotalElement) popupTotalElement.textContent = `$${grandTotal.toFixed(2)}`;
+        if (totalAmountElement) totalAmountElement.textContent = `$${grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+        if (popupTotalElement) popupTotalElement.textContent = `$${grandTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+    
+        // Update item prices in each cart product card
+        document.querySelectorAll(".product-card").forEach((card, index) => {
+            let totalAmountElement = card.querySelector(".total-amount");
+            if (totalAmountElement) {
+                let itemPrice = parseFloat(cart[index].price.replace(/[$,]/g, ""));
+                let itemTotal = itemPrice * cart[index].quantity;
+                totalAmountElement.textContent = `$${itemTotal.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+            }
+        });
     }
 
     function renderCart() {
@@ -50,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
                 <div class="total-section">
                     <div class="total-label">Total Amount</div>
-                    <div class="total-amount">$${(parseFloat(item.price.replace("$", "")) * item.quantity).toFixed(2)}</div>
+                    <div class="total-amount">${item.price}</div>
                 </div>
         
                 <button class="remove-btn" data-index="${index}">&#10005;</button>
@@ -71,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (newQuantity >= 1) {
                     cart[index].quantity = newQuantity;
                     localStorage.setItem("cartItems", JSON.stringify(cart));
-                    renderCart(); // Re-render cart with updated values
+                    renderCart();
                 }
             });
         });
@@ -87,13 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     renderCart(); // Initial render
-});
 
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const inputs = document.querySelectorAll(".checkout-container input");
+    /*** SHIPPING VALIDATION ***/
+    const shippingInputs = document.querySelectorAll(".checkout-container input");
     const checkoutButton = document.querySelector(".checkout-button");
+    const payButton = document.querySelector(".pay-btn");
 
     // Create a warning message
     const warningMessage = document.createElement("p");
@@ -101,48 +109,48 @@ document.addEventListener("DOMContentLoaded", function () {
     warningMessage.style.color = "red";
     warningMessage.style.fontSize = "14px";
     warningMessage.style.display = "none"; // Hidden by default
-    checkoutButton.parentNode.insertBefore(warningMessage, checkoutButton);
+    checkoutButton?.parentNode.insertBefore(warningMessage, checkoutButton);
 
-    function checkInputs() {
+    function validateShippingInfo() {
         let allFilled = true;
-        inputs.forEach(input => {
+
+        shippingInputs.forEach(input => {
             if (input.value.trim() === "") {
+                input.style.border = "2px solid red"; // Highlight empty fields
                 allFilled = false;
+            } else {
+                input.style.border = ""; // Remove highlight if filled
             }
         });
 
-        if (allFilled) {
-            checkoutButton.disabled = false;
-            warningMessage.style.display = "none";
-        } else {
-            checkoutButton.disabled = true;
-        }
+        warningMessage.style.display = allFilled ? "none" : "block";
+        return allFilled;
     }
 
-    checkoutButton.addEventListener("click", function (event) {
-        let allFilled = true;
-        inputs.forEach(input => {
-            if (input.value.trim() === "") {
-                allFilled = false;
+    // Enable/disable checkout button based on input validation
+    shippingInputs.forEach(input => {
+        input.addEventListener("input", () => {
+            if (validateShippingInfo()) {
+                checkoutButton?.removeAttribute("disabled");
+            } else {
+                checkoutButton?.setAttribute("disabled", "true");
             }
         });
+    });
 
-        if (!allFilled) {
-            event.preventDefault(); // Prevent button action
-            warningMessage.style.display = "block"; // Show the message
+    checkoutButton?.addEventListener("click", function (event) {
+        if (!validateShippingInfo()) {
+            event.preventDefault(); // Prevent proceeding if fields are empty
         } else {
-            openPopup(); // Proceed if all fields are filled
+            openPopup(); // Open payment popup if valid
         }
     });
 
-    // Listen for input changes
-    inputs.forEach(input => {
-        input.addEventListener("input", checkInputs);
+    /*** PAYMENT CONFIRMATION ***/
+    payButton?.addEventListener("click", function () {
+        alert("Order has been placed successfully!");
+        closePopup(); // Close the payment popup
+        cart = []; // Reset cart array
+        renderCart(); // Re-render cart to reflect changes
     });
-
-    checkInputs(); // Initial check
 });
-
-
-
-
