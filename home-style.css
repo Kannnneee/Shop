@@ -351,14 +351,16 @@ button[type="submit"] {
 }
 .name{
   display: flex;
-  justify-content: space-between;
+  gap: 3px;
 }
 p{
   font-size: 14px;
   text-align: center;
 }
 
-
+.inputname {
+  width: 175px;
+}
 /* ====================== Responsive Design ========================== */
 @media (max-width: 991px) {
   .navigation {

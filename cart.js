@@ -105,10 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create a warning message
     const warningMessage = document.createElement("p");
-    warningMessage.textContent = "⚠ Please fill in all required fields before proceeding.";
-    warningMessage.style.color = "red";
-    warningMessage.style.fontSize = "14px";
-    warningMessage.style.display = "none"; // Hidden by default
+   
     checkoutButton?.parentNode.insertBefore(warningMessage, checkoutButton);
 
     function validateShippingInfo() {
@@ -116,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         shippingInputs.forEach(input => {
             if (input.value.trim() === "") {
-                input.style.border = "2px solid red"; // Highlight empty fields
+               
                 allFilled = false;
             } else {
                 input.style.border = ""; // Remove highlight if filled
